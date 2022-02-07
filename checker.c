@@ -1,8 +1,6 @@
 #include <stdio.h>
 #include <assert.h>
 
-int testFailedCount = 0;
-
 struct data
 {
     float testTemperature,testSoc,testChargeRate;
