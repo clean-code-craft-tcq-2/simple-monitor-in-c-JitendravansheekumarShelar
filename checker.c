@@ -1,7 +1,20 @@
+/******************************************************************************
+
+                            Online C Compiler.
+                Code, Compile, Run and Debug C program online.
+Write your code in this editor and press "Run" button to compile and execute it.
+
+*******************************************************************************/
+
 #include <stdio.h>
 #include <assert.h>
 #include "checker.h"
-void printOnConsole(char inputMsg[] , int testResult , int testcaseNumber) {
+
+#define PROD_ENV 0
+#define TEST_ENV 1
+#define SW_BUILD TEST_ENV
+
+void printOnConsole(const char* inputMsg , int testResult , int testcaseNumber) {
     if(testResult != TEST_FAILED)
     {
         printf("Testcase no %d passed\n",testcaseNumber);
@@ -12,7 +25,7 @@ void printOnConsole(char inputMsg[] , int testResult , int testcaseNumber) {
     }
 }
 
-int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][2],int indexValue)
+int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
 {
     if(indexValue >= MAX_ARRAY_LENGTH )
     {
@@ -66,3 +79,4 @@ int main() {
   testbatteryIsOk(BMSData_C); 
   #endif
 }
+
