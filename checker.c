@@ -1,50 +1,46 @@
 #include <stdio.h>
 #include <assert.h>
-#include <checker.h>
+#include "checker.h"
 
-void printOnConsole(char msg[]) {
-    printf("%s out of range!\n",msg);
+void printOnConsole(char inputMsg[] , int testResult , int testcaseNumber) {
+    if(testResult != TEST_FAILED)
+    {
+        printf("Testcase no %d passed\n",testcaseNumber);
+    }
+    else
+    {
+        printf("Testcase no %d failed : %s out of range!\n",testcaseNumber,inputMsg);
+    }
 }
 
-int isChargeRateOutOfRange(const struct data f_BatteryInformation)
+int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][2])
 {
-    if(f_BatteryInformation.testChargeRate > 0.8)
-    {
-        printOnConsole("Charge Rate out of range!\n");
-        return 0;
+    for (int i=0;i < MAX_ARRAY_LENGTH;i++)
+    {  
+        if(f_BMSParameterData[i]->parameterValue < f_BMSParameterData[i]->minValue || f_BMSParameterData[i]->parameterValue > f_BMSParameterData[i]->maxValue) 
+        {
+            printOnConsole((f_BMSParameterData[i]->parameterMessage),TEST_FAILED,testPassedCounter);
+            return 0;
+        }
     }
+    printOnConsole("Dummy",TEST_PASSED,testPassedCounter);
     return 1;
 }
 
-int isSocOutOfRange(const struct data f_BatteryInformation)
-{
-     if(f_BatteryInformation.testSoc < 20 || f_BatteryInformation.testSoc > 80) 
-     {
-        printOnConsole("State of Charge out of range!\n");
-        return 0;
+void testbatteryIsOk(float * f_BMSData) {
+    int result = 0;
+    testPassedCounter+=1;
+    //Update Data which is passed as input
+    for (int i=0;i < MAX_ARRAY_LENGTH ;i++)
+    {
+        BMSParameterData[i]->parameterValue = f_BMSData[i];
     }
-    return isChargeRateOutOfRange(f_BatteryInformation); //return could be either 0 or 1
+    
+    result = isParameterOutOfRange(BMSParameterData);
+    
 }
 
-int isTemperatureOutOfRange(const struct data f_BatteryInformation)
-{
-     if(f_BatteryInformation.testTemperature < 0 || f_BatteryInformation.testTemperature > 45) 
-     {
-        printOnConsole("Temperature out of range!\n");
-        return 0;
-    }
-    return isSocOutOfRange(f_BatteryInformation); //return could be either 0 or 1
-}
-
-int testbatteryIsOk(float temperature, float soc, float chargeRate) {
- struct data l_BatteryInformation;
- l_BatteryInformation.testTemperature = temperature;
- l_BatteryInformation.testSoc = soc;
- l_BatteryInformation.testChargeRate = chargeRate;
-
- return isTemperatureOutOfRange(l_BatteryInformation); //return could be either 0 or 1 
-}
-
+//ORIGINAL FUNCTION
 int batteryIsOk(float temperature, float soc, float chargeRate) {
   if(temperature < 0 || temperature > 45) {
     printf("Temperature out of range!\n");
@@ -61,8 +57,11 @@ int batteryIsOk(float temperature, float soc, float chargeRate) {
 
 int main() {
   #if (SW_BUILD == TEST_ENV)
-  assert(testbatteryIsOk(25, 70, 0.7));
-  assert(!testbatteryIsOk(50, 85, 0));
-  assert(!testbatteryIsOk(25, 60, 0.9)); 
+  float BMSData_A[] = {25,70,0.7};
+  float BMSData_B[] = {50,85,0};
+  float BMSData_C[] = {25,60,0.9};
+  testbatteryIsOk(BMSData_A);
+  testbatteryIsOk(BMSData_B);
+  testbatteryIsOk(BMSData_C); 
   #endif
 }
