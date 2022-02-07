@@ -14,7 +14,7 @@ Write your code in this editor and press "Run" button to compile and execute it.
 #define TEST_ENV 1
 #define SW_BUILD TEST_ENV
 
-void printOnConsole(const char* inputMsg , int testResult , int testcaseNumber) {
+/*void printOnConsole(const char* inputMsg , int testResult , int testcaseNumber) {
     if(testResult != TEST_FAILED)
     {
         printf("Testcase no %d passed\n",testcaseNumber);
@@ -23,19 +23,19 @@ void printOnConsole(const char* inputMsg , int testResult , int testcaseNumber) 
     {
         printf("Testcase no %d failed : %s out of range!\n",testcaseNumber,inputMsg);
     }
-}
+}*/
 
 int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
 {
     if(indexValue >= MAX_ARRAY_LENGTH )
     {
-        printOnConsole("Dummy",TEST_PASSED,testPassedCounter);
+        printf("Testcase no %d passed\n",testPassedCounter);
         return 1;
     }
     
     if((f_BMSParameterData[indexValue]->parameterValue < f_BMSParameterData[indexValue]->minValue) ||(f_BMSParameterData[indexValue]->parameterValue > f_BMSParameterData[indexValue]->maxValue)) 
     {
-            printOnConsole((f_BMSParameterData[indexValue]->parameterMessage),TEST_FAILED,testPassedCounter);
+            printf("Testcase no %d failed : %s out of range!\n",testPassedCounter,(f_BMSParameterData[indexValue]->parameterMessage));
             return 0;
     }
     
