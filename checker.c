@@ -17,6 +17,29 @@
     }
 }*/
 
+int funcRangeCheck(int i)
+{
+    
+    if(i > 1)
+        return 0;
+    else
+        return 1;
+}
+
+int demoFuncToCheckCyclomatic()
+{
+    int result = 0;
+    for(int i=0;i<3;i++)
+    {
+        result = funcRangeCheck(i);
+        if(result == 0)
+        {
+            return 0;
+        }
+    }
+    return 1;
+}
+
 int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
 {
     if(indexValue >= MAX_ARRAY_LENGTH )
