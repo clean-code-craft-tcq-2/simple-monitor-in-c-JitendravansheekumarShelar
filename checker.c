@@ -17,21 +17,28 @@
     }
 }*/
 
-int funcRangeCheck(int i)
+int funcRangeCheck(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
 {
     
-    if(i > 1)
-        return 0;
+    if((f_BMSParameterData[indexValue]->parameterValue < f_BMSParameterData[indexValue]->minValue) ||\
+       (f_BMSParameterData[indexValue]->parameterValue > f_BMSParameterData[indexValue]->maxValue))
+       {
+           printf("Testcase no %d failed : %s out of range!\n",testPassedCounter,(f_BMSParameterData[indexValue]->parameterMessage));
+           return 0;
+       }
     else
+    {
+        printf("Testcase no %d passed\n",testPassedCounter);
         return 1;
+    }
 }
 
-int demoFuncToCheckCyclomatic()
+int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
 {
     int result = 0;
     for(int i=0;i<3;i++)
     {
-        result = funcRangeCheck(i);
+        result = funcRangeCheck(BMSParameterData,i);
         if(result == 0)
         {
             return 0;
@@ -40,7 +47,7 @@ int demoFuncToCheckCyclomatic()
     return 1;
 }
 
-int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
+/*int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
 {
     if(indexValue >= MAX_ARRAY_LENGTH )
     {
@@ -56,7 +63,7 @@ int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_
     }
     
     return isParameterOutOfRange(BMSParameterData,indexValue+1);
-}
+}*/
 
 void testbatteryIsOk(float * f_BMSData) {
     testPassedCounter+=1;
