@@ -27,5 +27,6 @@ BMSParameterInfo BMSParameterData[][MAX_ARRAY_CONTENT] = {
 int testPassedCounter = 0;
 
 void printOnConsole(const char* inputMsg , int testResult , int testcaseNumber);
-int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue);
+int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT]);
 void testbatteryIsOk(float * f_BMSData);
+int funcRangeCheck(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue);
