@@ -17,36 +17,7 @@
     }
 }*/
 
-int funcRangeCheck(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
-{
-    
-    if((f_BMSParameterData[indexValue]->parameterValue < f_BMSParameterData[indexValue]->minValue) ||\
-       (f_BMSParameterData[indexValue]->parameterValue > f_BMSParameterData[indexValue]->maxValue))
-       {
-           printf("Testcase no %d failed : %s out of range!\n",testPassedCounter,(f_BMSParameterData[indexValue]->parameterMessage));
-           return 0;
-       }
-    else
-    {
-        printf("Testcase no %d passed\n",testPassedCounter);
-        return 1;
-    }
-}
-
-int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
-{
-    int result = 0;
-    for(int i=0;i<3;i++)
-    {
-        result = funcRangeCheck(BMSParameterData,i);
-        if(result == 0)
-        {
-            return 0;
-        }
-    }
-    return 1;
-}
-
+/* Use of recurssive function , but due to cyclomatic complexity it is commented */
 /*int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
 {
     if(indexValue >= MAX_ARRAY_LENGTH )
@@ -65,16 +36,50 @@ int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_
     return isParameterOutOfRange(BMSParameterData,indexValue+1);
 }*/
 
+
+int funcRangeCheck(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT],int indexValue)
+{
+    
+    if((f_BMSParameterData[indexValue]->parameterValue < f_BMSParameterData[indexValue]->minValue) ||\
+       (f_BMSParameterData[indexValue]->parameterValue > f_BMSParameterData[indexValue]->maxValue))
+       {
+           return 0;
+       }
+    else
+    {
+        return 1;
+    }
+}
+
+int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_CONTENT])
+{
+    int result = 0;
+    for(int indexValue=0; indexValue < (MAX_ARRAY_CONTENT-1); indexValue++)
+    {
+        result = funcRangeCheck(BMSParameterData,indexValue);
+        if(!result)
+        {
+            printf("Testcase no %d failed : %s out of range!\n",testPassedCounter,(f_BMSParameterData[indexValue]->parameterMessage));
+            assert(!result);
+            return 0;
+        }
+    }
+    printf("Testcase no %d passed\n",testPassedCounter);
+    assert(result);
+    return 1;
+}
+
 void testbatteryIsOk(float * f_BMSData) {
+    int result =0;
+    
     testPassedCounter+=1;
     //Update Data which is passed as input
-    for (int i=0;i < MAX_ARRAY_LENGTH ;i++)
+    for (int i=0;i < (MAX_ARRAY_CONTENT-1) ;i++)
     {
         BMSParameterData[i]->parameterValue = f_BMSData[i];
     }
     
-    isParameterOutOfRange(BMSParameterData, 0);
-    
+    result = isParameterOutOfRange(BMSParameterData);    
 }
 
 //ORIGINAL FUNCTION
