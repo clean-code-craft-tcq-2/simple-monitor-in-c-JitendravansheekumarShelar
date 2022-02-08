@@ -21,14 +21,14 @@ int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_
 {
     if(indexValue >= MAX_ARRAY_LENGTH )
     {
-        //printf("Testcase no %d passed\n",testPassedCounter);
+        printf("Testcase no %d passed\n",testPassedCounter);
         return 1;
     }
     
     if((f_BMSParameterData[indexValue]->parameterValue < f_BMSParameterData[indexValue]->minValue) ||\
        (f_BMSParameterData[indexValue]->parameterValue > f_BMSParameterData[indexValue]->maxValue)) 
     {
-            //printf("Testcase no %d failed : %s out of range!\n",testPassedCounter,(f_BMSParameterData[indexValue]->parameterMessage));
+            printf("Testcase no %d failed : %s out of range!\n",testPassedCounter,(f_BMSParameterData[indexValue]->parameterMessage));
             return 0;
     }
     
