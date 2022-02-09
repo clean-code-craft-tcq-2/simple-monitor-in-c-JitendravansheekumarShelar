@@ -60,12 +60,12 @@ int isParameterOutOfRange(const BMSParameterInfo f_BMSParameterData[][MAX_ARRAY_
         if(!result)
         {
             printf("Testcase no %d failed : %s out of range!\n",testPassedCounter,(f_BMSParameterData[indexValue]->parameterMessage));
-            assert(!result);
+            assert(result,0);
             return 0;
         }
     }
     printf("Testcase no %d passed\n",testPassedCounter);
-    assert(result);
+    assert(result,1);
     return 1;
 }
 
