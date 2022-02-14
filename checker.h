@@ -3,15 +3,12 @@
 #define SOC 1
 #define CHARGE_RATE 2
 
-//define parameters limits
-#define TemperatureMinLimit 0
-#define TemperatureMaxLimit 45
-#define SOCMinLimit 20
-#define SOCMaxLimit 80
-#define ChargeRateMaxLimit 0.8
+//define SW Environment
+#define PROD_ENV 0
+#define TEST_ENV 1
+#define SW_BUILD TEST_ENV
 
-//declarations
-int isChargeRateOutOfRange(float * f_BMSData);
-int isSOCOutOfRange(float * f_BMSData);
-int isTemperatureOutOfRange(float * f_BMSData);
-int testBatteryIsOk(float * f_BMSData);
+//define warning check MACROS
+#define TEMPERATURE_WARNING_CHECK 1
+#define SOC_WARNING_CHECK 1
+#define CHARGE_RATE_WARNING_CHECK 1
