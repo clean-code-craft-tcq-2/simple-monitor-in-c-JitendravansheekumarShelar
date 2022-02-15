@@ -5,4 +5,4 @@
 #define TemperatureWarningMaxLimit 42.75
 
 extern int isTemperatureOutOfRange(float * f_BMSData);
-static int temperatureWarningCheck(float * f_BMSData);
+static int Temperature_RangeCheck(float * f_BMSData);
