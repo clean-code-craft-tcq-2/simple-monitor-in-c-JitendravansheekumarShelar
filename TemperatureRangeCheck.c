@@ -5,25 +5,23 @@
 
 int isRiseInTemprature(float * f_BMSData)
 {
-    #if (TEMPERATURE_WARNING_CHECK == 1)
+
     if (f_BMSData[TEMPERATURE] > TemperatureWarningMaxLimit && f_BMSData[TEMPERATURE] < TemperatureMaxLimit) 
     {
         printf("Warning : Rise in Temperature !\n");
         return 1; //Since it is warning
     }
-    #endif
     return 0; //No Warning
 }
 
 int isDropInTemprature(float * f_BMSData)
 {
-    #if (TEMPERATURE_WARNING_CHECK == 1)
+
     if(f_BMSData[TEMPERATURE] > TemperatureWarningMinLimit && f_BMSData[TEMPERATURE] < TemperatureMinLimit) 
     {
         printf("Warning : Drop in Temperature !\n");
         return 1; //Since it is warning
     }
-    #endif
     return isRiseInTemprature(&f_BMSData[0]);
 }
 
