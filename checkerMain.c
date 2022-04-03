@@ -19,7 +19,7 @@ int main() {
    
   assert(testBatteryIsOk(BMSData_A) == 1);
   assert(testBatteryIsOk(BMSData_B) == 0);
-  assert(testBatteryIsOk(BMSData_C) == 1);
+  assert(testBatteryIsOk(BMSData_C) == 0);
    
   #endif
 }
