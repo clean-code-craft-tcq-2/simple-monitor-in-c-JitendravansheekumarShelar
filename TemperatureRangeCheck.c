@@ -35,7 +35,7 @@ int Temperature_WarningRangeCheck(float * f_BMSData)
 int Temperature_RangeCheck(float * f_BMSData)
 {
     
-    if(!Temperature_WarningRangeCheck(&f_BMSData[0]) && (f_BMSData[TEMPERATURE] < TemperatureMinLimit || f_BMSData[TEMPERATURE] > TemperatureMaxLimit))
+    if(f_BMSData[TEMPERATURE] < TemperatureMinLimit || f_BMSData[TEMPERATURE] > TemperatureMaxLimit)
     {   
         printf("Error : Temperature out of range!\n");
         return 0;
@@ -45,5 +45,9 @@ int Temperature_RangeCheck(float * f_BMSData)
 
 int isTemperatureOutOfRange(float * f_BMSData)
 {
-    return Temperature_RangeCheck(&f_BMSData[0]) ? isSOCOutOfRange(&f_BMSData[0]) : 0;
+    if(!Temperature_WarningRangeCheck(&f_BMSData[0]))
+    {
+        return Temperature_RangeCheck(&f_BMSData[0]) ? isSOCOutOfRange(&f_BMSData[0]) : 0;
+    }
+    return 1;
 }
