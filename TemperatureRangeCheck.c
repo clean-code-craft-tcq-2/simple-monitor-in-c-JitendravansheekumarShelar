@@ -6,7 +6,7 @@
 
 int Temperature_RangeCheck(float * f_BMSData)
 {
-    #if (TEMPERATURE_WARNING_CHECK == 1)
+    /*#if (TEMPERATURE_WARNING_CHECK == 1)
     if(f_BMSData[TEMPERATURE] > TemperatureWarningMinLimit && f_BMSData[TEMPERATURE] < TemperatureMinLimit) 
     {
         printf("Warning : Drop in Temperature !\n");
@@ -18,7 +18,7 @@ int Temperature_RangeCheck(float * f_BMSData)
         printf("Warning : Rise in Temperature !\n");
         return 1; //Since it is warning
     }
-    #endif
+    #endif*/
     
     if(f_BMSData[TEMPERATURE] < TemperatureMinLimit || f_BMSData[TEMPERATURE] > TemperatureMaxLimit)
     {
