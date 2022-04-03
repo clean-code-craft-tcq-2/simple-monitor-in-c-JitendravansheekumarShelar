@@ -5,7 +5,7 @@
 
 int SOC_RangeCheck(float * f_BMSData)
 {
-    #if (SOC_WARNING_CHECK == 1)
+    /*#if (SOC_WARNING_CHECK == 1)
     if(f_BMSData[SOC] > SOCWarningMinLimit && f_BMSData[SOC] < SOCMinLimit) 
     {
         printf("Warning : Approaching Discharge!\n");
@@ -17,7 +17,7 @@ int SOC_RangeCheck(float * f_BMSData)
         printf("Warning : Approaching charge-peak!\n");
         return 1; //Since it is warning
     }
-    #endif
+    #endif*/
 
     if(f_BMSData[SOC] < SOCMinLimit || f_BMSData[SOC] > SOCMaxLimit)
     {
